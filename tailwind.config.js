@@ -6,8 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        visby: ["VISBY", "sans-serif"],
-        visbyb: ["VISBYB", "sans-serif"],
+        public: ["PUBLIC", "sans-serif"],
+        publicb: ["PUBLICB", "sans-serif"],
+        publict: ["PUBLICT", "sans-serif"],
       },
     },
   },
