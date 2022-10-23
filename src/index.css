@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "VISBY";
-  src: url("../public/fonts/visby/visbycf-regular.otf");
+* {
+  background-color: rgb(1, 1, 2);
 }
 
 @font-face {
-  font-family: "VISBYB";
-  src: url("../public/fonts/visby/visbycf-bold.otf");
+  font-family: "PUBLIC";
+  src: url("../public/fonts/public-sans/PublicSans-Regular.woff");
 }
 
-img {
+@font-face {
+  font-family: "PUBLICB";
+  src: url("../public/fonts/public-sans/PublicSans-Bold.woff");
+}
+
+@font-face {
+  font-family: "PUBLICT";
+  src: url("../public/fonts/public-sans/PublicSans-Thin.woff");
+}
+
+figure > img {
   border-radius: 0.375rem;
+  margin: 40px 0 40px 0;
 }
