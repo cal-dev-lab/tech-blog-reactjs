@@ -61,7 +61,7 @@ export default function OnePost() {
                     {postData.title}
                 </h2>
                 {categories.map((category) => (
-                    <p className=" font-public mb-5 tracking-widest p-2 bg-white md:w-1/4 rounded-md text-center">
+                    <p className="font-public mb-5 tracking-widest p-2 bg-white md:w-1/4 rounded-md text-center" key={category.title}>
                         category &gt; <span className="font-publicb bg-white">{category.title}</span>
                     </p>
                 ))}
