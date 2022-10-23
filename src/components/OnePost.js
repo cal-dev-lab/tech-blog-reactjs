@@ -4,6 +4,13 @@ import sanityClient from "../client.js";
 import BlockContent from "@sanity/block-content-to-react";
 import imageUrlBuilder from "@sanity/image-url";
 import { Container } from "../containers/Container"
+import {
+    EmailShareButton, EmailIcon,
+    FacebookShareButton, FacebookIcon,
+    RedditShareButton, RedditIcon,
+    TwitterShareButton, TwitterIcon,
+    WhatsappShareButton, WhatsappIcon
+} from "react-share";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -14,6 +21,13 @@ export default function OnePost() {
     const [postData, setPostData] = useState(null);
     const [categories, setCategory] = useState([])
     const { slug } = useParams();
+    
+    // START: URL for social share buttons
+    const getCurrentURL = () => {
+        return window.location.href;
+    }
+    const url = getCurrentURL()
+    // END: URL for social share buttons
 
     useEffect(() => {
         sanityClient
@@ -55,7 +69,7 @@ export default function OnePost() {
         <Container>
             <div>
                 <Link to={'/'}>
-                    <p className="text-gray-100 my-5">&larr; Back</p>
+                    <p className="text-purple-500 my-5">&larr; Back</p>
                 </Link>
                 <h2 className="font-publicb text-7xl lg:text-9xl text-gray-100 mb-5">
                     {postData.title}
@@ -65,13 +79,32 @@ export default function OnePost() {
                         category &gt; <span className="font-publicb bg-white">{category.title}</span>
                     </p>
                 ))}
+                {/* START: Share buttons */}
+                <div className="flex gap-x-5 mb-5">
+                    <FacebookShareButton url={url} quote={"Look what I found on" + url}>
+                        <FacebookIcon size={32} round={true} />
+                    </FacebookShareButton>
+                    <TwitterShareButton title={"A cool article I found: " + postData.title} url={url}>
+                        <TwitterIcon size={32} round={true} />
+                    </TwitterShareButton>
+                    <WhatsappShareButton title={"Look what I found!" + postData.title} url={url}>
+                        <WhatsappIcon size={32} round={true} />
+                    </WhatsappShareButton>
+                    <RedditShareButton title={postData.title} url={url}>
+                        <RedditIcon size={32} round={true} />
+                    </RedditShareButton>
+                    <EmailShareButton title={postData.title} url={url} subject={"I just checked out this article: " + postData.title}>
+                        <EmailIcon size={32} round={true} />
+                    </EmailShareButton>
+                </div>
+                {/* END: Share buttons */}
                 <div className="block gap-x-10">
                     <img className="mx-auto w-screen object-cover md:h-[30rem] rounded-md" src={urlFor(postData.mainImage).url()} alt={postData.title} />
                     <div className="font-public text-gray-500 tracking-wide">
                         <div>
                             <div className="flex mx-auto align-middle items-center my-5">
                                 <img
-                                    className="bg-indigo-100 rounded-full mr-4"
+                                    className="bg-gray-100 rounded-full mr-4"
                                     src={urlFor(postData.authorImage).width(50).url()}
                                     alt={"Article published by: " + postData.name}
                                 />
@@ -84,7 +117,8 @@ export default function OnePost() {
                                 </div>
                             </div>
                         </div>
-                        <BlockContent
+                        <BlockContent 
+                            className="text-gray-300"
                             blocks={postData.body}
                             projectId={sanityClient.clientConfig.projectId}
                             dataset={sanityClient.clientConfig.dataset}
