@@ -25,3 +25,13 @@ figure > img {
   border-radius: 0.375rem;
   margin: 40px 0 40px 0;
 }
+
+::-moz-selection {
+  background: rgb(168 85 247 / var(--tw-text-opacity));
+}
+::-webkit-selection {
+  background: rgb(168 85 247 / var(--tw-text-opacity));
+}
+::selection {
+  background: rgb(168 85 247 / var(--tw-text-opacity));
+}
